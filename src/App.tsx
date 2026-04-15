@@ -29,7 +29,7 @@ const App = () => {
   }
 
   return (
-    <BrowserRouter basename='/shopping/'>
+    <BrowserRouter basename='/shoppingmall-project/'>
       <Header
         isLoggedIn = {isLoggedIn}
         userId = {userId}
