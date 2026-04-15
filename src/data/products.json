@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "무선마우스",
+        "price": 10000,
+        "description": "무선마우스입니다.",
+        "img": "mouse.png"
+    },
+    {
+        "id": 2,
+        "name": "무선키보드",
+        "price": 20000,
+        "description": "무선키보드입니다.",
+        "img": "keyboard.png"
+    },
+    {
+        "id": 3,
+        "name": "USB",
+        "price": 30000,
+        "description": "USB입니다.",
+        "img": "usb.png"
+    },
+    {
+        "id": 4,
+        "name": "모니터",
+        "price": 40000,
+        "description": "모니터입니다.",
+        "img": "monitor.png"
+    }
+]
