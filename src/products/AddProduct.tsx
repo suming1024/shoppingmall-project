@@ -22,21 +22,26 @@ export default function AddProduct() {
     });
 
     //입력값 변경
-    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const {name, value, files } = e.target;
-        //텍스트(숫자포함) 데이터, 파일데이터 구분해야 함
-        if(name === 'image' && files) {
-            setFormData({
-                ...formData,
-                image: files[0]
-            });
-        } else {
-            setFormData({
-                ...formData,
-                [name]:value
-            });
-        }
-    };
+    const handleInputChange = (
+  e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+) => {
+    const target = e.target;
+
+    const { name, value } = target;
+
+    if (target instanceof HTMLInputElement && name === 'image' && target.files) {
+        setFormData({
+            ...formData,
+            image: target.files[0]
+        });
+        return;
+    }
+
+    setFormData({
+        ...formData,
+        [name]: value
+    });
+};
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault(); 
