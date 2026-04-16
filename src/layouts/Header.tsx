@@ -3,11 +3,12 @@ import { NavLink, useNavigate } from 'react-router-dom';
 
 interface HeaderProps{
   isLoggedIn: boolean;
-  userId?: string| null;
+  userId?: string | null;
+  userRole: string | null;
   onLogout: () => void;
 }
 
-export default function Header({isLoggedIn, userId, onLogout}: HeaderProps) {
+export default function Header({isLoggedIn, userId, userRole, onLogout}: HeaderProps) {
 
   const navigate = useNavigate();
 
@@ -16,10 +17,19 @@ export default function Header({isLoggedIn, userId, onLogout}: HeaderProps) {
       <nav>
         <NavLink to="/">홈</NavLink>
         <NavLink to="/products">상품목록</NavLink>
-        <NavLink to="/add-product">상품추가</NavLink>
+        <NavLink 
+              to="/add-product"
+              onClick={(e)=>{
+                if(userRole != 'admin'){
+                  e.preventDefault();
+                  alert("관리자 전용 메뉴입나다.");
+                }
+              }}
+          >상품등록
+        </NavLink>
         {isLoggedIn ? (
           <div className="logout-wrapper">
-            <span className="user-id">👤 {userId}</span>
+            <span className="user-id">👤 {userId} 님</span>
             <button 
               onClick={()=>{
                 onLogout();

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import users from '../data/user.json'; // 사용자 데이터 임포트
 
 //로그인 폼 데이터 정의
@@ -9,7 +9,7 @@ interface SignInFormData {
 }
 
 interface SignProps {
-    onLogin : ( username: string ) => void;
+    onLogin : ( username: string, role: string ) => void;
 }
 
 export default function SignIn({onLogin}: SignProps) {
@@ -54,9 +54,14 @@ export default function SignIn({onLogin}: SignProps) {
             return;
         }
 
-        onLogin(user.username) // 로그인 성공시 부모한테 알림
+        onLogin(user.username, user.role) // 로그인 성공시 부모한테 알림
 
-        if(user) {
+        //권한에 따른 화면이동
+        if(user.role === 'admin'){
+            setLoginResult('success');
+            navigate("/dashboard", {state: {username: user.username, role: user.role}});
+        }
+        else{
             setLoginResult('success');
             console.log("로그인 성공:", user);
     
@@ -102,6 +107,7 @@ export default function SignIn({onLogin}: SignProps) {
                     {/* <button onClick={handleSubmit} type="submit" className="btn-submit">로그인</button> */}
                     <button type="submit" className="btn-submit">로그인</button>
                 </form>
+                <p>아직 계정이 없으신가요? <Link to='/sign-up'>회원가입</Link></p>
 
                 {loginResult === 'fail' && (
                     <div className="error-message">
